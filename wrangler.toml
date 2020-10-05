@@ -1,0 +1,12 @@
+name = "dddd-mls-cognito-jwt-cw"
+type = "webpack"
+workers_dev = false
+
+account_id = "1a281281e78d332d3a9c862b38fbf2bf"
+zone_id = "029cc4b7a5c892f22bfd8e085132a639"
+
+route = "https://mls-cognito-jwt-cw.deaddodgeydigitaldeals.com/*"
+
+
+[vars]
+COGNITO_ENDPOINT_URL = "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_whR5F4xHk"
