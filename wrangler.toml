@@ -7,6 +7,10 @@ zone_id = "029cc4b7a5c892f22bfd8e085132a639"
 
 route = "https://mls-cognito-jwt-cw.deaddodgeydigitaldeals.com/*"
 
+kv_namespaces = [ 
+	 { binding = "MLS_COGNITO", id = "9f6a4a5d08984fee970800343ac20227" }
+]
 
 [vars]
 COGNITO_ENDPOINT_URL = "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_whR5F4xHk"
+
