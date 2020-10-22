@@ -1,19 +1,17 @@
 {
   "private": true,
-  "name": "dddd-mls-cognito-jwt-cw",
+  "name": "@my-liminal-space/cw-validate-cognito-jwt",
   "version": "1.0.0",
-  "description": "A template for kick starting a Cloudflare Workers project",
-  "main": "index.js",
+  "description": "A library for verifying AWS Cognito JWT values in a Cloudflare Workers project",
+  "main": "./src/test.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write '**/*.{js,css,json,md}'"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Andy Redhead <andy@far2gone.com>",
   "license": "MIT",
-  "devDependencies": {
-    "prettier": "^1.18.2"
-  },
+  "devDependencies": {},
   "dependencies": {
+    "jsonwebtoken": "^8.5.1",
     "jwk-to-pem": "^2.0.4"
   }
 }

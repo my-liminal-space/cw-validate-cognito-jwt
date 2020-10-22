@@ -13,4 +13,5 @@ kv_namespaces = [
 
 [vars]
 COGNITO_ENDPOINT_URL = "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_whR5F4xHk"
+COGNITO_APP_CLIENT_ID = "5peen44ratf8dm4hpljvtlhd1m"
 
