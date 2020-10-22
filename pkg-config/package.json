@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "name": "@my-liminal-space/cw-validate-cognito-jwt",
+  "version": "1.0.0",
+  "description": "A library for verifying AWS Cognito JWT values in a Cloudflare Workers project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andy Redhead <andy@far2gone.com>",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1",
+    "jwk-to-pem": "^2.0.4"
+  }
+}

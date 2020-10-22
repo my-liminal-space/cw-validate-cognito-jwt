@@ -62,6 +62,9 @@ harness is in file 'test.js' with package.json 'main' set to 'test.js'. The
 tests can be deployed and run using the bash script 'run-test.sh' (tried on 
 Ubuntu 18).
 
+If you want to replicate the test environment, you will need to modify 
+wrangler.toml to use your own values.
+
 
 ## Distribution
 
