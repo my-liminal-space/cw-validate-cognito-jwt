@@ -40,7 +40,7 @@ environment variables in the Workers app wrangler.toml.
 
 It is expected that the library will be included using a statement such as:
 
-    @my-liminal-space/cw-validate-cognito-jwt
+    import { validateCognitoJwt } from '@my-liminal-space/cw-validate-cognito-jwt';
 
 
 ## Development
@@ -58,7 +58,7 @@ The test harness uses the built in 'assert' library to demonstrate that the
 code works as intended.
 
 In the repo, the main library code is in the file 'check-jwt.js' and the test 
-harness is in file 'test.js' with package.json 'main' set to 'test.js'. The  
+harness is in file 'test.js' with package.json 'main' set to 'test.js'. The 
 tests can be deployed and run using the bash script 'run-test.sh' (tried on 
 Ubuntu 18).
 
