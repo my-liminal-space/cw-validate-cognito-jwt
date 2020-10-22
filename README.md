@@ -40,7 +40,7 @@ environment variables in the Workers app wrangler.toml.
 
 It is expected that the library will be included using a statement such as:
 
-    import { validateCognitoJwt } from '@my-liminal-space/cw-validate-cognito-jwt';
+    import { validateCognitoJwt } from 'cw-validate-cognito-jwt';
 
 
 ## Development
