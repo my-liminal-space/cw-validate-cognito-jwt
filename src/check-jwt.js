@@ -11,7 +11,8 @@ export const JWT_EXPECTED_TOKEN_USE = "id";
 
   Parameters:
 
-    cognitoEndpointUrl - from Cognito config, expected form; https://cognito-idp.<aws-region-x>.amazonaws.com/<aws-region-x>_<idstr>
+    cognitoEndpointUrl - from Cognito config, expected form; 
+        https://cognito-idp.<aws-region-x>.amazonaws.com/<aws-region-x>_<idstr>
 
     appClientId - from Cognito user pool config (an alphanumeric string)
 
@@ -95,7 +96,7 @@ export async function validateCognitoJwt(cognitoEndpointUrl, appClientId, kvInst
 export async function fetchCognitoJwk(cognitoEndpointUrl) {
 
   const cognitoJwtPublicKeyDownloadUrl = cognitoEndpointUrl + "/.well-known/jwks.json";
-  console.log("about to fetch jwk from: " + cognitoJwtPublicKeyDownloadUrl);
+  //console.log("about to fetch jwk from: " + cognitoJwtPublicKeyDownloadUrl);
 
   var jwkResult;
   var pems = {};
@@ -119,7 +120,7 @@ export async function fetchCognitoJwk(cognitoEndpointUrl) {
     var jwk = { kty: key_type, n: modulus, e: exponent };
     var pem = jwkToPem(jwk);
     pems[key_id] = pem;
-    console.log("processing jwk entries, added key: " + key_id);
+    //console.log("processing jwk entries, added key: " + key_id);
   }
 
   return pems;
@@ -131,7 +132,8 @@ export async function fetchCognitoJwk(cognitoEndpointUrl) {
     - header
     - payload
     - signature
-    - raw, the orignal encoded string split on the '.' seperator, an object with properties; header, payload, signature
+    - raw, the orignal encoded string split on the '.' seperator, an object with properties; 
+        header, payload, signature
 
   Throws an exception if the token doesn't have 3 non-zero length sections.
 */
@@ -154,7 +156,7 @@ export function decodeJwt(token) {
   const header = JSON.parse(atob(parts[0]));
   const payload = JSON.parse(atob(parts[1]));
   const signature = atob(parts[2].replace(/_/g, '/').replace(/-/g, '+'));
-  console.log(header);
+  //console.log(header);
   return {
     header: header,
     payload: payload,
@@ -192,12 +194,14 @@ export async function findPemByKid(cognitoEndpointUrl, kvInstance, kId) {
 
     if (jwkPemLock === null) {
 
-      // no lock marker yet so assume this is first time in, add lock, go fetch pem (assuming it exists), add to kv then return
+      // no lock marker yet so assume this is first time in, add lock, go fetch pem (assuming it exists), add to kv 
+      // then return
       // (improvement would be to return pem then add to kv)
-      // (another improvement would be to add a marker to say that pem does not exist, which would releive issue of make up kid)
+      // (another improvement would be to add a marker to say that pem does not exist, which would relieve issue of 
+      // make up kid)
 
       const lockData = { lockCreated: Date.now() };
-      await kvInstance.put(jwkPemLockKey, JSON.stringify(lockData), {expirationTtl: 62});  // auto expire the lock entry after 62 seconds
+      await kvInstance.put(jwkPemLockKey, JSON.stringify(lockData), {expirationTtl: 62});  // expire lock entry after 62s
 
       // now go to cognito for public keys
       const pemsMap = await fetchCognitoJwk(cognitoEndpointUrl);
@@ -206,12 +210,14 @@ export async function findPemByKid(cognitoEndpointUrl, kvInstance, kId) {
       if (jwkPem !== undefined) { // hurray, found a pem - save into kv then return        
         await kvInstance.put(jwkPemDataKey, JSON.stringify(jwkPem), {expirationTtl: 1209600}); // store for 14 days
       } else {
-        // interesting, the kId does not map to a Cognito key - cant be a valid JWT (well, not for our purposes), return null
+        // interesting, the kId does not map to a Cognito key - cant be a valid JWT (well, not for our purposes), 
+        // return null
       }
 
     } else {
 
       // there is a lock file, have to wait up to 60s for write to be visible so go get pem direct from Cognito
+      // AWS Cognito can manage having a few of our hurd go thundering by... :)
 
       const pemsMap = await fetchCognitoJwk(cognitoEndpointUrl);
       jwkPem = pemsMap[kId];

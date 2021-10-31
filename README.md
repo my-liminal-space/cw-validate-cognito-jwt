@@ -31,7 +31,7 @@ Where the parameters are:
 
     appClientId - from Cognito user pool config (an alphanumeric string)
 
-    kvInstance - Cloudflare KV instance used to cache pem values
+    kvInstance - Binding name of KV instance used to cache PEM values
 
     cognitoJwt - JWT instance to validate
 
@@ -49,13 +49,23 @@ The code lives in [this GitHub repo]().
 
 Testing code that depends upon features of the Cloudflare Worker platform (such
 as client HTTP Fetch, which this code uses to fetch the public JWK from the 
-Cognito endpoint) is "interesting". In order to build confidence that the 
-code will work as expected, the approach taken is to test by deploying the lib 
-along with a test harness into a Cloudflare Workers app and point it at a real 
-Cognito instance.
+Cognito endpoint) is "interesting"...
+
+In order to build confidence that the code will work as expected, the approach 
+taken is to test by deploying the lib along with a test harness into a live
+Cloudflare Workers app and point it at a real Cognito instance.
 
 The test harness uses the built in 'assert' library to demonstrate that the 
 code works as intended.
+
+The tests are triggered by running run-test.sh from a command line. This 
+script requires:
+ - The aws cli to be installed locally
+ - Valid Cognito username and password credentials to be available as env vars
+
+These are necessary as the script passes the username/password combo to the aws
+cli to generate a valid JWT, which is sent as a query string param to the test 
+suite running in Cloudflare.
 
 In the repo, the main library code is in the file 'check-jwt.js' and the test 
 harness is in file 'test.js' with package.json 'main' set to 'test.js'. The 

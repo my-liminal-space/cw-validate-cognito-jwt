@@ -9,6 +9,9 @@ import { validateCognitoJwt, fetchCognitoJwk, decodeJwt, findPemByKid } from './
 const QUERY_PARAM_NAME_VALID_JWT = "valid_jwt";
 
 
+/*
+    Workers entry point.
+*/
 addEventListener('fetch', event => {
   event.respondWith(handleRunTestRequest(event.request));
 });
