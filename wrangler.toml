@@ -1,6 +1,8 @@
 name = "dddd-mls-cognito-jwt-cw"
 type = "webpack"
 workers_dev = false
+compatibility_date = "2021-10-31"
+
 
 account_id = "1a281281e78d332d3a9c862b38fbf2bf"
 zone_id = "029cc4b7a5c892f22bfd8e085132a639"
